@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Bridely.ai</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #FFFBEB; /* Amber Background */
+        }
+        /* Custom Colors */
+        .bg-olive { background-color: #365314; }
+        .text-olive { color: #365314; }
+        .text-gold { color: #B45309; }
+        .border-gold { border-color: #B45309; }
+        .text-brown { color: #78350F; }
+        .bg-golden-brown { background-color: #92400E; }
+        .hover\:bg-golden-brown-dark:hover { background-color: #78350F; }
+        
+        .admin-sidebar {
+            width: 280px;
+        }
+        .admin-tab-content {
+            display: none;
+        }
+        .admin-tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar bg-olive text-gray-300 flex flex-col">
+            <div class="flex items-center justify-center h-20 border-b border-green-800">
+                <h1 class="text-2xl font-bold text-white">Bridely.ai Admin</h1>
+            </div>
+            <nav id="admin-nav" class="flex-1 px-4 py-6 space-y-2">
+                <a href="/dashboard.html" class="admin-nav-link flex items-center px-4 py-2 rounded-lg bg-green-900 text-white">
+                    <svg class="h-6 w-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                    Dashboard
+                </a>
+                 <a href="#communications" class="admin-nav-link flex items-center px-4 py-2 rounded-lg hover:bg-green-700 hover:text-white">
+                   <svg class="h-6 w-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    Communications
+                </a>
+                <a href="#marketing" class="admin-nav-link flex items-center px-4 py-2 rounded-lg hover:bg-green-700 hover:text-white">
+                   <svg class="h-6 w-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                    Marketing
+                </a>
+                <a href="#couples" class="admin-nav-link flex items-center px-4 py-2 rounded-lg hover:bg-green-700 hover:text-white">
+                    <svg class="h-6 w-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                    Couples
+                </a>
+                 <a href="/vendor-directory.html" class="admin-nav-link flex items-center px-4 py-2 rounded-lg hover:bg-green-700 hover:text-white">
+                    <svg class="h-6 w-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.653-.184-1.268-.5-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.653.184-1.268.5-1.857m0 0a5.002 5.002 0 019 0m-4.5 4.5V12"></path></svg>
+                    Vendors
+                </a>
+                 <a href="#subscriptions" class="admin-nav-link flex items-center px-4 py-2 rounded-lg hover:bg-green-700 hover:text-white">
+                    <svg class="h-6 w-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
+                    Subscriptions
+                </a>
+                 <a href="#accounting" class="admin-nav-link flex items-center px-4 py-2 rounded-lg hover:bg-green-700 hover:text-white">
+                    <svg class="h-6 w-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                    Accounting
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col">
+             <!-- Top Bar -->
+            <header class="bg-white shadow-sm h-20 flex items-center justify-between px-6">
+                 <h2 id="main-header" class="text-2xl font-semibold text-gray-800">Dashboard</h2>
+                 <div>
+                     <span class="text-sm">Admin User</span>
+                 </div>
+            </header>
+            <main class="flex-1 p-6 overflow-y-auto">
+                <!-- Dashboard Content -->
+                <div id="dashboard" class="admin-tab-content active">
+                     <!-- Stat Cards -->
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+                        <div class="bg-white p-6 rounded-lg shadow-lg">
+                            <h3 class="text-gray-500 text-sm font-medium uppercase">Total Platform Revenue</h3>
+                            <p class="text-3xl font-semibold text-green-600 mt-1">$12,458</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-lg">
+                            <h3 class="text-gray-500 text-sm font-medium uppercase">Active Couples</h3>
+                            <p class="text-3xl font-semibold text-gray-800 mt-1">1,402</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-lg">
+                            <h3 class="text-gray-500 text-sm font-medium uppercase">Active Vendors</h3>
+                            <p class="text-3xl font-semibold text-gray-800 mt-1">356</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-lg">
+                            <h3 class="text-gray-500 text-sm font-medium uppercase">New Signups (30d)</h3>
+                            <p class="text-3xl font-semibold text-gray-800 mt-1">88</p>
+                        </div>
+                    </div>
+                </div>
+                 <!-- Communications Content -->
+                <div id="communications" class="admin-tab-content">
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                        <div class="lg:col-span-1 bg-white p-6 rounded-lg shadow-lg">
+                            <h3 class="text-xl font-semibold text-olive mb-4">Compose Message</h3>
+                            <form class="space-y-4">
+                                <div>
+                                    <label for="recipient" class="block text-sm font-medium text-gray-700">To:</label>
+                                    <select id="recipient" name="recipient" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-gold focus:border-gold sm:text-sm rounded-md">
+                                        <option>All Users</option>
+                                        <option>All Couples</option>
+                                        <option>All Vendors</option>
+                                        <option>Pro Vendors</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="subject" class="block text-sm font-medium text-gray-700">Subject:</label>
+                                    <input type="text" name="subject" id="subject" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                </div>
+                                <div>
+                                    <label for="message" class="block text-sm font-medium text-gray-700">Message:</label>
+                                    <textarea id="message" name="message" rows="10" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"></textarea>
+                                </div>
+                                <button type="submit" class="w-full inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-golden-brown hover:bg-golden-brown-dark">
+                                    Send Email
+                                </button>
+                            </form>
+                        </div>
+                        <div class="lg:col-span-2 bg-white p-6 rounded-lg shadow-lg">
+                            <h3 class="text-xl font-semibold text-olive mb-4">Sent Log</h3>
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Subject</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Recipients</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td class="px-6 py-4">New Feature: AI Previews!</td><td class="px-6 py-4">All Vendors</td><td class="px-6 py-4">2025-06-12</td></tr>
+                                    <tr><td class="px-6 py-4">Q2 Marketing Reminder</td><td class="px-6 py-4">Pro Vendors</td><td class="px-6 py-4">2025-06-01</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                 <!-- Marketing Content -->
+                 <div id="marketing" class="admin-tab-content">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <div class="bg-white p-6 rounded-lg shadow-lg">
+                            <h3 class="text-xl font-semibold text-olive mb-4">User Acquisition Funnel (Last 30 Days)</h3>
+                            <canvas id="funnelChart"></canvas>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-lg">
+                             <h3 class="text-xl font-semibold text-olive mb-4">Geographic Heatmap - Top Markets</h3>
+                             <div class="relative">
+                                 <img src="https://i.stack.imgur.com/xO8s5.png" alt="Map of the USA" class="rounded-lg opacity-80">
+                                 <div class="absolute" style="top: 40%; left: 18%;"><div class="w-4 h-4 bg-red-600 rounded-full animate-pulse"></div></div>
+                                 <div class="absolute" style="top: 60%; left: 20%;"><div class="w-3 h-3 bg-red-600 rounded-full animate-pulse"></div></div>
+                                 <div class="absolute" style="top: 55%; left: 80%;"><div class="w-2 h-2 bg-red-600 rounded-full animate-pulse"></div></div>
+                                  <div class="absolute" style="top: 58%; left: 60%;"><div class="w-5 h-5 bg-red-600 rounded-full animate-pulse"></div></div>
+                             </div>
+                        </div>
+                    </div>
+                 </div>
+                 <!-- Couples Content -->
+                 <div id="couples" class="admin-tab-content">
+                    <div class="bg-white p-6 rounded-lg shadow-lg">
+                        <h3 class="text-xl font-semibold text-olive mb-4">Manage Couples</h3>
+                        <table class="min-w-full divide-y divide-gray-200">
+                             <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Couple Names</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Wedding Date</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Coordinator</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Platform Fee</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="px-6 py-4">Jane & John</td>
+                                    <td class="px-6 py-4">2026-10-26</td>
+                                    <td class="px-6 py-4 font-medium text-gold">sbwedding.co</td>
+                                    <td class="px-6 py-4"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">Refunded</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4">Sarah & Tom</td>
+                                    <td class="px-6 py-4">2026-12-12</td>
+                                     <td class="px-6 py-4">Island Coordinators</td>
+                                    <td class="px-6 py-4"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Paid</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                 </div>
+                 <!-- Vendors Content -->
+                 <div id="vendors" class="admin-tab-content">
+                     <div class="bg-white p-6 rounded-lg shadow-lg">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-xl font-semibold text-olive">Manage Vendors</h3>
+                            <button id="createInternalVendorBtn" class="px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-golden-brown hover:bg-golden-brown-dark">Create Internal Vendor</button>
+                        </div>
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Vendor Name</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Plan</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Featured</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="vendor-table-body">
+                                <tr><td class="px-6 py-4 font-medium">Aloha Photography</td><td class="px-6 py-4">Pro</td><td class="px-6 py-4"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-amber-100 text-amber-800">Yes</span></td><td class="px-6 py-4"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Active</span></td></tr>
+                                <tr><td class="px-6 py-4 font-medium">Island Petals</td><td class="px-6 py-4">Pro</td><td class="px-6 py-4"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800">No</span></td><td class="px-6 py-4"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Active</span></td></tr>
+                                <tr><td class="px-6 py-4 font-medium">Urban Jungle HI</td><td class="px-6 py-4">Basic</td><td class="px-6 py-4"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800">No</span></td><td class="px-6 py-4"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Active</span></td></tr>
+                                <tr><td class="px-6 py-4 font-medium">Hawaii Event Rentals</td><td class="px-6 py-4">Advertising Only</td><td class="px-6 py-4"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-amber-100 text-amber-800">Yes</span></td><td class="px-6 py-4"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Active</span></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                 </div>
+                 <!-- Subscriptions Content -->
+                 <div id="subscriptions" class="admin-tab-content">
+                    <div class="bg-white p-6 rounded-lg shadow-lg">
+                        <h3 class="text-xl font-semibold text-olive mb-4">Subscription Revenue</h3>
+                        <canvas id="subscriptionsChart"></canvas>
+                    </div>
+                </div>
+                 <!-- Accounting Content -->
+                 <div id="accounting" class="admin-tab-content">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                        <div class="bg-white p-6 rounded-lg shadow-lg">
+                            <h3 class="text-gray-500 text-sm font-medium uppercase">Gross Subscription Revenue</h3>
+                            <p class="text-3xl font-semibold text-gray-800 mt-1">$23,495.50</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-lg">
+                            <h3 class="text-gray-500 text-sm font-medium uppercase">Platform Fees Collected</h3>
+                            <p class="text-3xl font-semibold text-gray-800 mt-1">$1,500.00</p>
+                        </div>
+                         <div class="bg-white p-6 rounded-lg shadow-lg">
+                            <h3 class="text-gray-500 text-sm font-medium uppercase">Net Revenue (After Fees)</h3>
+                            <p class="text-3xl font-semibold text-green-600 mt-1">$24,285.55</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <div class="bg-white p-6 rounded-lg shadow-lg">
+                            <h3 class="text-xl font-semibold text-olive mb-4">Tax Reporting</h3>
+                            <p class="text-sm text-gray-500 mb-4">Generate and download financial reports for your business.</p>
+                             <div class="space-y-4">
+                                <div class="p-4 border rounded-lg flex items-center justify-between">
+                                    <div>
+                                        <p class="font-medium">Quarterly P&L Statement</p>
+                                        <p class="text-sm text-gray-500">Q2 2025 (Apr 1 - Jun 30)</p>
+                                    </div>
+                                    <button class="px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">Download PDF</button>
+                                </div>
+                                 <div class="p-4 border rounded-lg flex items-center justify-between">
+                                    <div>
+                                        <p class="font-medium">Annual Revenue Report</p>
+                                        <p class="text-sm text-gray-500">2024</p>
+                                    </div>
+                                    <button class="px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">Download CSV</button>
+                                </div>
+                             </div>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-lg">
+                             <h3 class="text-xl font-semibold text-olive mb-4">Accounting Integration</h3>
+                             <div class="flex items-center">
+                                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5F/Intuit_QuickBooks_logo.svg/2560px-Intuit_QuickBooks_logo.svg.png" alt="QuickBooks Logo" class="h-8">
+                                 <div class="ml-4 flex-grow">
+                                     <p class="font-medium" id="quickbooks-status-admin">Not Connected</p>
+                                 </div>
+                                 <button id="quickbooks-connect-btn-admin" class="px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700">Connect</button>
+                             </div>
+                             <p class="text-xs text-gray-500 mt-2">Automatically sync all Bridely.ai revenue and expense data with your QuickBooks Online account.</p>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    
+    <!-- Internal Vendor Modal -->
+    <div id="internalVendorModal" class="fixed z-50 inset-0 overflow-y-auto hidden">
+         <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen">&#8203;</span>
+            <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+                <form id="internalVendorForm">
+                    <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                        <h3 class="text-lg leading-6 font-medium text-gray-900">Create Internal Vendor</h3>
+                        <div class="mt-4 space-y-4">
+                            <input type="text" name="internal_name" id="internal_name" placeholder="Business Name (e.g., sbwedding.co)" class="w-full border-gray-300 rounded-md" required>
+                            <input type="email" name="internal_email" id="internal_email" placeholder="Contact Email" class="w-full border-gray-300 rounded-md" required>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse">
+                        <button type="submit" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-golden-brown text-base font-medium text-white hover:bg-golden-brown-dark sm:ml-3 sm:w-auto sm:text-sm">Create Account</button>
+                        <button type="button" id="cancelInternalVendor" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 sm:mt-0 sm:w-auto sm:text-sm">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const navLinks = document.querySelectorAll('.admin-nav-link');
+            const contents = document.querySelectorAll('.admin-tab-content');
+            const mainHeader = document.getElementById('main-header');
+            let charts = {};
+
+            const createCharts = () => {
+                // Funnel Chart
+                const funnelCtx = document.getElementById('funnelChart')?.getContext('2d');
+                if (funnelCtx && !charts.funnel) {
+                    charts.funnel = new Chart(funnelCtx, {
+                        type: 'bar',
+                        data: {
+                            labels: ['Website Visitors', 'Signups Initiated', 'Signups Completed'],
+                            datasets: [{
+                                label: 'User Funnel',
+                                data: [15200, 3800, 1402],
+                                backgroundColor: ['#FBBF24', '#D97706', '#92400E']
+                            }]
+                        },
+                        options: { indexAxis: 'y', responsive: true, plugins: { legend: { display: false } } }
+                    });
+                }
+                
+                // Subscriptions Chart
+                const subsCtx = document.getElementById('subscriptionsChart')?.getContext('2d');
+                if (subsCtx && !charts.subs) {
+                    charts.subs = new Chart(subsCtx, {
+                        type: 'bar',
+                        data: {
+                            labels: ['Advertising Only', 'Basic Plan', 'Pro Plan'],
+                            datasets: [{
+                                label: 'Monthly Recurring Revenue (MRR)',
+                                data: [2399, 8498, 12598],
+                                backgroundColor: ['#FBBF24', '#D97706', '#92400E']
+                            }]
+                        },
+                        options: {
+                            scales: { y: { beginAtZero: true, ticks: { callback: value => '$' + value } } },
+                            plugins: { legend: { display: false } }
+                        }
+                    });
+                }
+            };
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', e => {
+                    e.preventDefault();
+                    const targetId = link.getAttribute('href').substring(1);
+                    
+                    navLinks.forEach(l => {
+                        l.classList.remove('bg-green-900', 'text-white');
+                        l.classList.add('hover:bg-green-700', 'hover:text-white');
+                    });
+                    link.classList.add('bg-green-900', 'text-white');
+
+                    contents.forEach(c => c.classList.remove('active'));
+                    const activeContent = document.getElementById(targetId);
+                    activeContent.classList.add('active');
+                    
+                    mainHeader.textContent = link.textContent.trim();
+
+                    if(targetId === 'marketing' || targetId === 'subscriptions') {
+                        setTimeout(createCharts, 0);
+                    }
+                });
+            });
+
+             const qbBtnAdmin = document.getElementById('quickbooks-connect-btn-admin');
+            const qbStatusAdmin = document.getElementById('quickbooks-status-admin');
+            if(qbBtnAdmin) {
+                qbBtnAdmin.addEventListener('click', () => {
+                    qbBtnAdmin.textContent = 'Connected';
+                    qbBtnAdmin.disabled = true;
+                    qbBtnAdmin.classList.remove('bg-green-600', 'hover:bg-green-700');
+                    qbBtnAdmin.classList.add('bg-gray-400');
+                    qbStatusAdmin.textContent = 'Connected';
+                    qbStatusAdmin.classList.add('text-green-600');
+                });
+            }
+
+            // Internal Vendor Modal Logic
+            const internalVendorModal = document.getElementById('internalVendorModal');
+            const createInternalVendorBtn = document.getElementById('createInternalVendorBtn');
+            const cancelInternalVendorBtn = document.getElementById('cancelInternalVendor');
+            const internalVendorForm = document.getElementById('internalVendorForm');
+            
+            createInternalVendorBtn.addEventListener('click', () => {
+                internalVendorModal.classList.remove('hidden');
+            });
+            
+            cancelInternalVendorBtn.addEventListener('click', () => {
+                 internalVendorModal.classList.add('hidden');
+            });
+            
+            internalVendorForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const name = document.getElementById('internal_name').value;
+                const vendorTableBody = document.getElementById('vendor-table-body');
+                const newRow = document.createElement('tr');
+                newRow.innerHTML = `
+                    <td class="px-6 py-4 whitespace-nowrap font-medium text-gold">${name}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">Owner</td>
+                    <td class="px-6 py-4 whitespace-nowrap"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-amber-100 text-amber-800">Yes</span></td>
+                    <td class="px-6 py-4 whitespace-nowrap"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Active</span></td>
+                `;
+                vendorTableBody.prepend(newRow);
+                internalVendorModal.classList.add('hidden');
+                e.target.reset();
+            });
+            
+            createCharts();
+        });
+    </script>
+</body>
+</html>

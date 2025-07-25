@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile - Bridely.ai Vendor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #FFFBEB; /* Amber Background */
+        }
+        /* Custom Colors */
+        .bg-olive { background-color: #365314; }
+        .text-olive { color: #365314; }
+        .text-gold { color: #B45309; }
+        .border-gold { border-color: #B45309; }
+        .focus\:ring-gold:focus { --tw-ring-color: #B45309; }
+        .text-brown { color: #78350F; }
+        .bg-golden-brown { background-color: #92400E; }
+        .hover\:bg-golden-brown-dark:hover { background-color: #78350F; }
+        .bg-apricot { background-color: #FFEDD5; }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Navigation -->
+    <nav class="bg-olive shadow-md fixed top-0 w-full z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0">
+                    <a href="/landing-page.html" class="text-2xl font-bold text-white">bridely.ai <span class="text-sm font-medium text-amber-300">for Vendors</span></a>
+                </div>
+                <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
+                    <a href="/vendor-dashboard.html" class="text-gray-300 hover:text-white inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium">Dashboard</a>
+                    <a href="/vendor-booking-management.html" class="text-gray-300 hover:text-white inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium">Bookings</a>
+                    <a href="/calendar.html" class="text-gray-300 hover:text-white inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium">Calendar</a>
+                    <a href="/edit-profile.html" class="text-amber-300 border-amber-300 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Profile</a>
+                    <a href="/analytics.html" class="text-gray-300 hover:text-white inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium">Analytics</a>
+                </div>
+                <div class="hidden sm:ml-6 sm:flex sm:items-center">
+                    <span class="text-sm text-gray-300">Aloha Photography</span>
+                    <a href="/landing-page.html" class="ml-4 text-sm font-medium text-gray-400 hover:text-white">Log out</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="pt-24 pb-12">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <form action="#" method="POST" class="space-y-8">
+                <!-- Header -->
+                <header class="flex flex-col md:flex-row md:items-center md:justify-between">
+                    <div>
+                        <h1 class="text-3xl font-bold text-olive">Edit Your Public Profile</h1>
+                        <p class="text-lg text-brown">This is what couples will see when they find you in the directory.</p>
+                    </div>
+                    <button type="submit" class="mt-4 md:mt-0 inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-golden-brown hover:bg-golden-brown-dark">
+                        Save Changes
+                    </button>
+                </header>
+
+                <!-- Profile Header Section -->
+                <div class="bg-white p-8 rounded-lg shadow-xl">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-6">Profile Header</h2>
+                    <!-- Cover Photo -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Cover Photo</label>
+                        <div id="cover-photo-preview-container" class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+                            <img id="cover-photo-preview" src="https://placehold.co/1200x400/92400E/FFFFFF?text=Your+Cover+Photo" alt="Cover photo preview" class="w-full h-48 object-cover rounded-md">
+                        </div>
+                        <input id="cover-photo-input" type="file" class="sr-only">
+                        <button type="button" onclick="document.getElementById('cover-photo-input').click()" class="mt-2 text-sm font-medium text-gold hover:text-brown">Change cover photo</button>
+                    </div>
+
+                     <!-- Profile Picture & Business Name -->
+                    <div class="mt-6 flex items-center space-x-5">
+                        <div class="flex-shrink-0">
+                             <img id="profile-pic-preview" class="h-24 w-24 rounded-full object-cover" src="https://placehold.co/256x256/B45309/FFFFFF?text=Logo" alt="Profile Picture">
+                        </div>
+                         <input id="profile-pic-input" type="file" class="sr-only">
+                         <button type="button" onclick="document.getElementById('profile-pic-input').click()" class="text-sm font-medium text-gray-700 bg-white rounded-md border border-gray-300 py-2 px-3 hover:bg-gray-50">Change logo</button>
+                        <div class="flex-grow">
+                             <label for="business_name" class="block text-sm font-medium text-gray-700">Business Name</label>
+                            <input type="text" name="business_name" id="business_name" value="Aloha Photography" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md focus:ring-gold focus:border-gold">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- About Us Section -->
+                <div class="bg-white p-8 rounded-lg shadow-xl">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-4">About Your Business</h2>
+                    <textarea id="about" name="about" rows="6" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md focus:ring-gold focus:border-gold" placeholder="Tell couples your story. What makes you special?">Capturing vibrant, love-filled moments across the beautiful islands of Hawaii. We believe in telling authentic stories through our lenses, creating timeless memories you'll cherish forever. From intimate elopements to grand celebrations, we're here to make your day unforgettable.</textarea>
+                </div>
+                
+                <!-- Portfolio Gallery -->
+                <div class="bg-white p-8 rounded-lg shadow-xl">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-4">Portfolio Gallery</h2>
+                     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4" id="portfolio-gallery">
+                        <img src="https://placehold.co/400x400/E9D5FF/3730A3?text=Wedding+1" class="rounded-lg object-cover aspect-square">
+                        <img src="https://placehold.co/400x400/D1FAE5/065F46?text=Wedding+2" class="rounded-lg object-cover aspect-square">
+                        <img src="https://placehold.co/400x400/FEF3C7/92400E?text=Wedding+3" class="rounded-lg object-cover aspect-square">
+                        <!-- Upload Button -->
+                        <label for="portfolio-upload" class="flex flex-col items-center justify-center border-2 border-gray-300 border-dashed rounded-lg aspect-square cursor-pointer hover:border-gold hover:text-gold text-gray-500">
+                            <svg class="mx-auto h-12 w-12" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true"><path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                            <span class="mt-2 block text-sm font-medium">Add Photo/Video</span>
+                            <input id="portfolio-upload" type="file" class="sr-only" multiple>
+                        </label>
+                     </div>
+                </div>
+                
+                <!-- Services & Pricing -->
+                <div class="bg-white p-8 rounded-lg shadow-xl">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-4">Services & Pricing</h2>
+                    <p class="text-sm text-gray-500 mb-6">Define the packages you offer. This helps couples understand your pricing structure.</p>
+                    <div id="packages-container" class="space-y-6">
+                        <!-- Package 1 -->
+                        <div class="p-4 border rounded-lg">
+                            <input type="text" value="The Aloha Package" class="text-lg font-semibold border-0 p-1 -ml-1 w-full focus:ring-0 focus:outline-none">
+                            <input type="text" value="Starting at $4,500" class="text-sm text-gray-600 border-0 p-1 -ml-1 w-full focus:ring-0 focus:outline-none">
+                            <textarea rows="3" class="mt-2 w-full border-gray-300 rounded-md focus:ring-gold focus:border-gold">8 hours of coverage, second photographer, engagement session, online gallery.</textarea>
+                        </div>
+                         <!-- Package 2 -->
+                        <div class="p-4 border rounded-lg">
+                            <input type="text" value="The Mahalo Package" class="text-lg font-semibold border-0 p-1 -ml-1 w-full focus:ring-0 focus:outline-none">
+                            <input type="text" value="Starting at $3,200" class="text-sm text-gray-600 border-0 p-1 -ml-1 w-full focus:ring-0 focus:outline-none">
+                            <textarea rows="3" class="mt-2 w-full border-gray-300 rounded-md focus:ring-gold focus:border-gold">6 hours of coverage, online gallery.</textarea>
+                        </div>
+                    </div>
+                    <button type="button" id="add-package-btn" class="mt-4 text-sm font-medium text-gold hover:text-brown">+ Add Package</button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const coverPhotoInput = document.getElementById('cover-photo-input');
+            const coverPhotoPreview = document.getElementById('cover-photo-preview');
+            const profilePicInput = document.getElementById('profile-pic-input');
+            const profilePicPreview = document.getElementById('profile-pic-preview');
+            const portfolioUpload = document.getElementById('portfolio-upload');
+            const portfolioGallery = document.getElementById('portfolio-gallery');
+            const addPackageBtn = document.getElementById('add-package-btn');
+            const packagesContainer = document.getElementById('packages-container');
+
+            const handleImagePreview = (input, preview) => {
+                input.addEventListener('change', (event) => {
+                    const file = event.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = (e) => {
+                            preview.src = e.target.result;
+                        }
+                        reader.readAsDataURL(file);
+                    }
+                });
+            };
+
+            handleImagePreview(coverPhotoInput, coverPhotoPreview);
+            handleImagePreview(profilePicInput, profilePicPreview);
+            
+            portfolioUpload.addEventListener('change', event => {
+                 const files = event.target.files;
+                 for(const file of files) {
+                     const reader = new FileReader();
+                     reader.onload = e => {
+                         const img = document.createElement('img');
+                         img.src = e.target.result;
+                         img.className = 'rounded-lg object-cover aspect-square';
+                         portfolioGallery.prepend(img);
+                     }
+                     reader.readAsDataURL(file);
+                 }
+            });
+            
+            addPackageBtn.addEventListener('click', () => {
+                const newPackage = document.createElement('div');
+                newPackage.className = 'p-4 border rounded-lg';
+                newPackage.innerHTML = `
+                    <input type="text" placeholder="Package Name" class="text-lg font-semibold border-0 p-1 -ml-1 w-full focus:ring-0 focus:outline-none">
+                    <input type="text" placeholder="Starting at..." class="text-sm text-gray-600 border-0 p-1 -ml-1 w-full focus:ring-0 focus:outline-none">
+                    <textarea rows="3" class="mt-2 w-full border-gray-300 rounded-md focus:ring-gold focus:border-gold" placeholder="Describe what's included..."></textarea>
+                `;
+                packagesContainer.appendChild(newPackage);
+            });
+        });
+    </script>
+</body>
+</html>

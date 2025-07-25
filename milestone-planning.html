@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Milestone Planning - Bridely.ai</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #FFFBEB; /* Amber Background */
+        }
+        /* Custom Colors */
+        .bg-olive { background-color: #365314; }
+        .text-gold { color: #B45309; }
+        .border-gold { border-color: #B45309; }
+        .text-brown { color: #78350F; }
+        .bg-golden-brown { background-color: #92400E; }
+        .hover\:bg-golden-brown-dark:hover { background-color: #78350F; }
+        .text-amber-600 { color: #D97706; }
+        .focus\:ring-amber-500:focus { --tw-ring-color: #F59E0B; }
+        
+        .task-label:hover {
+            background-color: #FEFCE8; /* yellow-50 */
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Navigation -->
+    <nav class="bg-olive shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0">
+                    <a href="/landing-page.html" class="text-2xl font-bold text-white">bridely.ai</a>
+                </div>
+                <div class="hidden sm:ml-6 sm:flex sm:items-center">
+                    <a href="#" class="text-sm font-medium text-amber-300 hover:text-white">My Dashboard</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Milestone Selection -->
+    <div class="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center">
+                <h2 class="text-3xl font-extrabold text-olive">
+                    Build Your Custom Wedding Plan
+                </h2>
+                <p class="mt-2 text-lg text-brown">
+                    Select the milestones that apply to your big day. We'll use this to create your personalized planning timeline.
+                </p>
+            </div>
+            
+            <form id="milestoneForm" class="mt-10 bg-white p-8 rounded-lg shadow-xl space-y-12">
+                <!-- Milestones Data -->
+                <script>
+                    const milestones = {
+                        "1 Year Before": [
+                            "Set a budget [budget tracker]",
+                            "Create a guestlist [RSVP and Seating Plan]",
+                            "Research and visit venues",
+                            "Create a Wedding Website and Wedding Registry",
+                            "Research Catering",
+                            "Research Photographer, Videographer, and Social Media Reel",
+                            "Research Florist Design and Floral Shops",
+                            "Research DJ, Bands, Music options",
+                            "Decide on wedding rehearsal lunch or dinner (if applicable)"
+                        ],
+                        "9 Months Before": [
+                            "Book a Venue [budget tracker]",
+                            "Book a Wedding Coordinator or Planner [budget tracker]",
+                            "Book Catering [budget tracker]",
+                            "Begin the search for a bridal dress. Say yes to the dress!",
+                            "Research decor themes, color scheme and define your design aesthetics",
+                            "Research sources for decors and rentals items",
+                            "Research restaurant for after wedding rehearsal lunch/dinner",
+                            "Order Couples Wedding Attires and Accessories [budget tracker]",
+                            "Send out wedding announcement from your wedding website"
+                        ],
+                        "6 Months Before": [
+                            "Book Photographer [budget tracker]",
+                            "Book Videographer / Social Media Reel [budget tracker]",
+                            "Book rental items [budget tracker]",
+                            "Book Florist [budget tracker]",
+                            "Schedule dates for bridal dress fittings & alterations",
+                            "Book wedding decor supplier",
+                            "Send out wedding invitations and rsvp timeline",
+                            "Research Hair and Make-up",
+                            "Research Travel and Hotel Accommodations"
+                        ],
+                         "3 Months Before": [
+                            "Book Hair and Make-up [budget tracker]",
+                            "Source décor items [budget tracker]",
+                            "Book Hotel and Travel Accommodation [budget tracker]",
+                            "Decide on music: guest arrival/walking down aisle/leaving wedding ceremony/ entering reception",
+                            "Create a ceremony seating plan for first rows",
+                            "Create the line up for the ceremony"
+                        ],
+                        "2 Months Before": [
+                            "Final bridal dress fittings (bring shoes/jewelry/underwear for the day to trial)",
+                            "Finalize couples’ vows and speeches",
+                            "Decide who will give Toast during reception",
+                            "Chase outstanding RSVPs",
+                            "Provide final guest numbers and meal choices to caterer (including vendor meal count)",
+                            "Get all your vendor insurance and send to your venue and Day of Coordinator",
+                            "Send all signed contract to your Day of Coordinator",
+                            "Pay all vendors in full",
+                            "Finalize seating plan",
+                            "Finalize photo list with Photographer",
+                            "Finalize a song list of must plays and don’t play with DJ/Band",
+                            "Schedule Make-up Trial",
+                            "Create Thank You Cards for Vendors (tips optional)",
+                            "Work with Day of Coordinator to Create Day of Event Timeline",
+                            "Work with Day of Coordinator to align on venue Floorplan Design"
+                        ],
+                        "2 Weeks Before": [
+                            "Confirm attire for all ready and fitted (especially for destination couple)",
+                            "Confirm marriage license are ready (especially for destination couple)",
+                            "Groom and Bride speech finalized",
+                            "Final confirmation of details with venue",
+                            "Confirm wedding party duties leading up to/on the day",
+                            "Rehearsal at Venue",
+                            "Organize who will be bringing non-hire items to the venue and when",
+                            "Give the wedding rings to the officiant or groomsmen",
+                            "Prepare an overnight bag for night before/night of wedding",
+                            "Create a snack bag for day of event (you need to eat)"
+                        ]
+                    };
+                </script>
+
+                <!-- Container for dynamically generated milestones -->
+                <div id="milestone-container" class="space-y-10"></div>
+                
+                <div class="pt-8 border-t border-gray-200 flex justify-end">
+                    <button type="submit" class="group relative flex justify-center py-3 px-6 border border-transparent text-sm font-medium rounded-md text-white bg-golden-brown hover:bg-golden-brown-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gold">
+                        Create My Plan
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.getElementById('milestone-container');
+            
+            const createTag = (text, colorClasses) => {
+                const tag = document.createElement('span');
+                tag.textContent = text;
+                tag.className = `ml-2 text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full ${colorClasses}`;
+                return tag;
+            }
+
+            for (const [category, tasks] of Object.entries(milestones)) {
+                const categoryId = 'category-' + category.replace(/\s+/g, '-').toLowerCase();
+
+                const section = document.createElement('div');
+                section.innerHTML = `
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-xl font-bold text-olive">${category}</h3>
+                        <button type="button" data-category="${categoryId}" class="select-all-btn text-sm font-medium text-gold hover:text-amber-800">Select All</button>
+                    </div>
+                    <fieldset class="space-y-4" id="${categoryId}">
+                        <!-- Tasks will be inserted here -->
+                    </fieldset>
+                `;
+                
+                const fieldset = section.querySelector(`#${categoryId}`);
+                
+                tasks.forEach((taskText, index) => {
+                    const taskId = `${categoryId}-task-${index}`;
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'relative flex items-start p-3 rounded-lg task-label transition-colors duration-150';
+
+                    const checkboxDiv = document.createElement('div');
+                    checkboxDiv.className = 'flex items-center h-5';
+                    const checkbox = document.createElement('input');
+                    checkbox.id = taskId;
+                    checkbox.name = taskId;
+                    checkbox.type = 'checkbox';
+                    checkbox.checked = true; // Default to selected
+                    checkbox.className = 'focus:ring-amber-500 h-4 w-4 text-amber-600 border-gray-300 rounded';
+                    checkboxDiv.appendChild(checkbox);
+
+                    const labelDiv = document.createElement('div');
+                    labelDiv.className = 'ml-3 text-sm';
+                    const label = document.createElement('label');
+                    label.htmlFor = taskId;
+                    label.className = 'font-medium text-gray-700 cursor-pointer';
+
+                    let cleanText = taskText;
+                    if (taskText.includes('[budget tracker]')) {
+                        cleanText = taskText.replace(' [budget tracker]', '');
+                        label.appendChild(document.createTextNode(cleanText));
+                        label.appendChild(createTag('Budget', 'bg-blue-100 text-blue-800'));
+                    } else if (taskText.includes('[RSVP and Seating Plan]')) {
+                        cleanText = taskText.replace(' [RSVP and Seating Plan]', '');
+                        label.appendChild(document.createTextNode(cleanText));
+                        label.appendChild(createTag('Guests', 'bg-green-100 text-green-800'));
+                    } else {
+                        label.textContent = taskText;
+                    }
+
+                    labelDiv.appendChild(label);
+                    
+                    wrapper.appendChild(checkboxDiv);
+                    wrapper.appendChild(labelDiv);
+                    fieldset.appendChild(wrapper);
+                });
+
+                container.appendChild(section);
+            }
+
+            document.querySelectorAll('.select-all-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const categoryId = this.getAttribute('data-category');
+                    const checkboxes = document.querySelectorAll(`#${categoryId} input[type="checkbox"]`);
+                    const allChecked = Array.from(checkboxes).every(cb => cb.checked);
+                    checkboxes.forEach(cb => cb.checked = !allChecked);
+                    this.textContent = allChecked ? 'Select All' : 'Deselect All';
+                });
+            });
+
+            document.getElementById('milestoneForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Your personalized plan has been created! In a real application, you would be taken to your dashboard.');
+            });
+        });
+    </script>
+</body>
+</html>

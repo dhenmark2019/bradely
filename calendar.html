@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar - Bridely.ai Vendor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #FFFBEB; /* Amber Background */
+        }
+        /* Custom Colors */
+        .bg-olive { background-color: #365314; }
+        .text-olive { color: #365314; }
+        .text-gold { color: #B45309; }
+        .border-gold { border-color: #B45309; }
+        .text-brown { color: #78350F; }
+        .bg-golden-brown { background-color: #92400E; }
+        .hover\:bg-golden-brown-dark:hover { background-color: #78350F; }
+        
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, minmax(0, 1fr));
+            gap: 1px;
+        }
+        .calendar-day {
+            min-height: 120px;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Navigation -->
+    <nav class="bg-olive shadow-md fixed top-0 w-full z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0">
+                    <a href="/landing-page.html" class="text-2xl font-bold text-white">bridely.ai <span class="text-sm font-medium text-amber-300">for Vendors</span></a>
+                </div>
+                <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
+                    <a href="/vendor-dashboard.html" class="text-gray-300 hover:text-white inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium">Dashboard</a>
+                    <a href="/vendor-booking-management.html" class="text-gray-300 hover:text-white inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium">Bookings</a>
+                    <a href="/calendar.html" class="text-amber-300 border-amber-300 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Calendar</a>
+                    <a href="/edit-profile.html" class="text-gray-300 hover:text-white inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium">Profile</a>
+                    <a href="/analytics.html" class="text-gray-300 hover:text-white inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium">Analytics</a>
+                </div>
+                <div class="hidden sm:ml-6 sm:flex sm:items-center">
+                    <span class="text-sm text-gray-300">Aloha Photography</span>
+                    <a href="/landing-page.html" class="ml-4 text-sm font-medium text-gray-400 hover:text-white">Log out</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="pt-24 pb-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Calendar Header -->
+            <header class="flex items-center justify-between mb-8">
+                <div class="flex items-center space-x-4">
+                    <button id="prev-month" class="p-2 rounded-full hover:bg-amber-100">
+                        <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                    </button>
+                    <h1 id="month-year" class="text-2xl font-bold text-olive"></h1>
+                    <button id="next-month" class="p-2 rounded-full hover:bg-amber-100">
+                        <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    </button>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <button id="connectGoogleBtn" class="inline-flex items-center justify-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md shadow-sm text-gray-700 bg-white hover:bg-gray-50">
+                        <svg class="w-5 h-5 mr-2 -ml-1" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M48 24C48 22.0224 47.9103 20.0449 47.7309 18.0674H24V29.382H37.8172C37.2605 32.5337 35.122 35.122 32.071 36.8174V43.18H40.2455C45.2135 38.309 48 31.691 48 24Z" fill="#4285F4"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M24 48C30.6177 48 36.2135 45.7191 40.2455 41.809L32.071 35.4416C29.8944 36.9213 27.1528 37.8146 24 37.8146C17.3823 37.8146 11.8921 33.3034 9.81461 27.3315H1.44385V33.6994C5.47584 41.9775 13.9101 48 24 48Z" fill="#34A853"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M9.81457 27.3314C9.35843 25.9606 9.10674 24.4853 9.10674 23.9999C9.10674 23.5144 9.35843 22.0392 9.81457 20.6684V14.3005H1.44381C0.52809 16.382 0 18.6628 0 21.0001C0 26.4889 0 31.9777 0 31.9777C0 34.315 0.52809 36.5957 1.44381 38.6772L9.81457 32.3093V27.3314Z" fill="#FBBC05"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M24 9.18539C27.6742 9.18539 30.9888 10.4438 33.4551 12.7247L40.4326 5.64045C36.2135 1.96629 30.6177 0 24 0C13.9101 0 5.47584 6.02247 1.44385 14.3006L9.81461 20.6685C11.8921 14.6966 17.3823 9.18539 24 9.18539Z" fill="#EA4335"></path></svg>
+                        Connect Google
+                    </button>
+                    <button id="addEventBtn" class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-golden-brown hover:bg-golden-brown-dark">
+                        Add Event
+                    </button>
+                </div>
+            </header>
+
+            <!-- Calendar -->
+            <div class="bg-white rounded-lg shadow-xl">
+                <!-- Day of week headers -->
+                <div class="grid grid-cols-7 text-center text-sm font-semibold text-gray-600 border-b">
+                    <div class="py-3">Sun</div><div class="py-3">Mon</div><div class="py-3">Tue</div><div class="py-3">Wed</div><div class="py-3">Thu</div><div class="py-3">Fri</div><div class="py-3">Sat</div>
+                </div>
+                <!-- Calendar Grid -->
+                <div id="calendar-grid" class="calendar-grid bg-gray-200">
+                    <!-- Days will be generated by JS -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Add Event Modal -->
+    <div id="addEventModal" class="fixed z-50 inset-0 overflow-y-auto hidden">
+      <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+        <span class="hidden sm:inline-block sm:align-middle sm:h-screen">&#8203;</span>
+        <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+            <form id="eventForm">
+              <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                  <h3 class="text-lg leading-6 font-medium text-gray-900">Add to Calendar</h3>
+                  <div class="mt-4 space-y-4">
+                      <input type="text" name="title" placeholder="Event Title (e.g., Miller Wedding)" class="w-full border-gray-300 rounded-md shadow-sm" required>
+                      <input type="date" name="date" class="w-full border-gray-300 rounded-md shadow-sm" required>
+                      <select name="type" class="w-full border-gray-300 rounded-md shadow-sm">
+                          <option value="booked">Booked Event (e.g. Wedding)</option>
+                          <option value="meeting">Booked Meeting (e.g. Consultation)</option>
+                          <option value="inquiry">Tentative Inquiry</option>
+                          <option value="blocked">Blocked Date</option>
+                      </select>
+                      <div class="relative flex items-start">
+                          <div class="flex items-center h-5">
+                              <input id="add-meet-link" name="add-meet-link" type="checkbox" class="focus:ring-gold h-4 w-4 text-amber-600 border-gray-300 rounded">
+                          </div>
+                          <div class="ml-3 text-sm">
+                              <label for="add-meet-link" class="font-medium text-gray-700">Add Google Meet link</label>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                <button type="submit" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-golden-brown text-base font-medium text-white hover:bg-golden-brown-dark sm:ml-3 sm:w-auto sm:text-sm">Add to Calendar</button>
+                <button type="button" id="cancelBtn" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 sm:mt-0 sm:w-auto sm:text-sm">Cancel</button>
+              </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const monthYearEl = document.getElementById('month-year');
+        const calendarGridEl = document.getElementById('calendar-grid');
+        const prevMonthBtn = document.getElementById('prev-month');
+        const nextMonthBtn = document.getElementById('next-month');
+        const addEventBtn = document.getElementById('addEventBtn');
+        const addEventModal = document.getElementById('addEventModal');
+        const cancelBtn = document.getElementById('cancelBtn');
+        const eventForm = document.getElementById('eventForm');
+        const connectGoogleBtn = document.getElementById('connectGoogleBtn');
+
+        let currentDate = new Date(2025, 5, 1);
+
+        const events = {
+            '2025-06-21': { title: 'Miller Wedding', type: 'booked', hasMeetLink: false },
+            '2025-06-12': { title: 'Jane & John Inquiry', type: 'inquiry', hasMeetLink: false },
+            '2025-06-13': { title: 'Consult w/ Sarah', type: 'meeting', hasMeetLink: true },
+            '2025-07-01': { title: 'Davis Engagement Shoot', type: 'booked', hasMeetLink: false },
+            '2025-07-15': { title: 'Family Vacation', type: 'blocked', hasMeetLink: false },
+        };
+
+        const renderCalendar = () => {
+            calendarGridEl.innerHTML = '';
+            const year = currentDate.getFullYear();
+            const month = currentDate.getMonth();
+            monthYearEl.textContent = `${currentDate.toLocaleString('default', { month: 'long' })} ${year}`;
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+            for (let i = 0; i < firstDay; i++) {
+                calendarGridEl.innerHTML += '<div class="bg-gray-50"></div>';
+            }
+
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                const event = events[dateStr];
+                
+                let eventHtml = '';
+                if (event) {
+                    let bgColor = 'bg-yellow-100 text-yellow-800'; // inquiry
+                    if (event.type === 'booked') bgColor = 'bg-green-100 text-green-800';
+                    if (event.type === 'blocked') bgColor = 'bg-red-100 text-red-800';
+                    if (event.type === 'meeting') bgColor = 'bg-purple-100 text-purple-800';
+
+                    let meetIcon = '';
+                    if (event.hasMeetLink) {
+                        meetIcon = `<svg class="w-4 h-4 inline-block ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>`;
+                    }
+
+                    eventHtml = `<div class="p-1 mt-1 text-xs font-medium rounded ${bgColor}">${event.title}${meetIcon}</div>`;
+                }
+
+                calendarGridEl.innerHTML += `
+                    <div class="calendar-day bg-white p-2 border-t border-gray-200">
+                        <div class="font-semibold text-gray-700">${day}</div>
+                        ${eventHtml}
+                    </div>
+                `;
+            }
+        };
+
+        prevMonthBtn.addEventListener('click', () => {
+            currentDate.setMonth(currentDate.getMonth() - 1);
+            renderCalendar();
+        });
+
+        nextMonthBtn.addEventListener('click', () => {
+            currentDate.setMonth(currentDate.getMonth() + 1);
+            renderCalendar();
+        });
+        
+        // Modal & Form Logic
+        addEventBtn.addEventListener('click', () => addEventModal.classList.remove('hidden'));
+        cancelBtn.addEventListener('click', () => addEventModal.classList.add('hidden'));
+        window.addEventListener('click', (e) => {
+            if (e.target === addEventModal) addEventModal.classList.add('hidden');
+        });
+
+        eventForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const date = formData.get('date');
+            const title = formData.get('title');
+            const type = formData.get('type');
+            const hasMeetLink = formData.get('add-meet-link') === 'on';
+
+            if (date && title && type) {
+                events[date] = { title, type, hasMeetLink };
+                renderCalendar();
+                addEventModal.classList.add('hidden');
+                e.target.reset();
+            }
+        });
+
+        connectGoogleBtn.addEventListener('click', () => {
+           alert('This would initiate the Google Calendar connection process.');
+        });
+
+        renderCalendar();
+    });
+    </script>
+</body>
+</html>
+

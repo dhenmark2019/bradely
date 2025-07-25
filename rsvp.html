@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RSVP - Jane & John's Wedding</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lora:ital,wght@0,400;1,400&family=Montserrat:wght@400;700&display=swap">
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #FFFBEB; /* Amber Background */
+        }
+        /* Custom Colors */
+        .bg-olive { background-color: #365314; }
+        .text-olive { color: #365314; }
+        .text-gold { color: #B45309; }
+        .border-gold { border-color: #B45309; }
+        .focus\:ring-gold:focus { --tw-ring-color: #B45309; }
+        .text-brown { color: #78350F; }
+        .bg-golden-brown { background-color: #92400E; }
+        .hover\:bg-golden-brown-dark:hover { background-color: #78350F; }
+        .preview-font-heading { font-family: 'Playfair Display', serif; }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Navigation -->
+    <nav class="bg-olive shadow-md">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0">
+                    <a href="#" class="text-2xl font-bold text-white">Jane & John</a>
+                </div>
+                <div class="hidden sm:ml-6 sm:flex sm:items-center">
+                    <a href="#" class="text-sm font-medium text-gray-300 hover:text-white">Back to Wedding Website</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- RSVP Form -->
+    <main class="py-12">
+        <div class="max-w-xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white p-8 sm:p-12 rounded-lg shadow-xl text-center">
+                <h1 class="text-4xl font-bold preview-font-heading text-olive">Kindly Respond</h1>
+                <p class="mt-2 text-gray-600">Please let us know if you can join our celebration by August 26, 2026.</p>
+
+                <form id="rsvp-form" class="mt-8 space-y-6 text-left">
+                    <div>
+                        <label for="guest-name" class="block text-sm font-medium text-gray-700">Full Name(s)</label>
+                        <input type="text" name="guest-name" id="guest-name" placeholder="Enter the name(s) on your invitation" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md focus:ring-gold focus:border-gold">
+                    </div>
+
+                    <fieldset>
+                        <legend class="block text-sm font-medium text-gray-700">Will you be attending?</legend>
+                        <div class="mt-2 space-y-2">
+                            <div class="flex items-center">
+                                <input id="attending-yes" name="attending" type="radio" class="focus:ring-gold h-4 w-4 text-amber-600 border-gray-300">
+                                <label for="attending-yes" class="ml-3 block text-sm font-medium text-gray-700">Joyfully Accepts</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input id="attending-no" name="attending" type="radio" class="focus:ring-gold h-4 w-4 text-amber-600 border-gray-300">
+                                <label for="attending-no" class="ml-3 block text-sm font-medium text-gray-700">Regretfully Declines</label>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <div id="meal-choice-section" class="hidden">
+                        <label for="meal-choice" class="block text-sm font-medium text-gray-700">Meal Choice</label>
+                        <select id="meal-choice" name="meal-choice" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-gold focus:border-gold sm:text-sm rounded-md">
+                            <option>Please select an option...</option>
+                            <option>Seared Mahi-Mahi</option>
+                            <option>Filet Mignon</option>
+                            <option>Vegetarian Risotto</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-golden-brown hover:bg-golden-brown-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gold">
+                            Submit RSVP
+                        </button>
+                    </div>
+                </form>
+                 <div id="thank-you-message" class="hidden mt-8 text-center">
+                    <h2 class="text-2xl font-bold text-olive">Thank You!</h2>
+                    <p class="mt-2 text-gray-600">Your response has been recorded.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('rsvp-form');
+            const mealChoiceSection = document.getElementById('meal-choice-section');
+            const attendingYesRadio = document.getElementById('attending-yes');
+            const attendingNoRadio = document.getElementById('attending-no');
+            const thankYouMessage = document.getElementById('thank-you-message');
+
+            attendingYesRadio.addEventListener('change', () => {
+                if (attendingYesRadio.checked) {
+                    mealChoiceSection.classList.remove('hidden');
+                }
+            });
+
+            attendingNoRadio.addEventListener('change', () => {
+                if (attendingNoRadio.checked) {
+                    mealChoiceSection.classList.add('hidden');
+                }
+            });
+            
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                form.classList.add('hidden');
+                thankYouMessage.classList.remove('hidden');
+            });
+        });
+    </script>
+</body>
+</html>

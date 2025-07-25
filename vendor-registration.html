@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vendor Registration - Bridely.ai</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #FFFBEB; /* Amber Background */
+        }
+        /* Custom Colors */
+        .bg-olive { background-color: #365314; }
+        .text-olive { color: #365314; }
+        .text-gold { color: #B45309; }
+        .border-gold { border-color: #B45309; }
+        .focus\:ring-gold:focus { --tw-ring-color: #B45309; }
+        .text-brown { color: #78350F; }
+        .bg-golden-brown { background-color: #92400E; }
+        .hover\:bg-golden-brown-dark:hover { background-color: #78350F; }
+        .bg-apricot { background-color: #FFEDD5; }
+        .text-amber-600 { color: #D97706; }
+
+        .plan-card {
+            transition: all 0.3s ease;
+        }
+        .plan-card.selected {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border-color: #B45309; /* Gold border */
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Navigation -->
+    <nav class="bg-olive shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0">
+                    <a href="/landing-page.html" class="text-2xl font-bold text-white">bridely.ai</a>
+                </div>
+                 <div class="hidden sm:ml-6 sm:flex sm:items-center">
+                    <a href="#" class="text-sm font-medium text-gray-300 hover:text-white">Already a partner? Log in</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Registration Form -->
+    <div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl w-full space-y-8">
+            <div>
+                <h2 class="mt-6 text-center text-3xl font-extrabold text-olive">
+                    Join Bridely.ai and Grow Your Business
+                </h2>
+                <p class="mt-2 text-center text-lg text-brown">
+                    Connect with couples and streamline your workflow with our all-in-one platform.
+                </p>
+            </div>
+            
+            <!-- AI Features Highlight Section -->
+            <div class="bg-white p-8 rounded-lg shadow-xl">
+                 <h3 class="text-2xl font-bold text-center text-olive">Powered by Bridely AI</h3>
+                 <p class="text-center text-gray-500 mt-2">Our Basic, Pro, and Enterprise plans include a full suite of AI tools designed to save you time.</p>
+                 <div class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                    <div class="flex flex-col items-center">
+                        <div class="flex items-center justify-center h-12 w-12 rounded-full bg-apricot text-gold">
+                           <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.405 1.05c.412-1.363 2.176-1.363 2.588 0l.055.183c.13.43.485.785.915.915l.183.055c1.363.412 1.363 2.176 0 2.588l-.183.055a1.26 1.26 0 01-.915.915l-.055.183c-.412 1.363-2.176 1.363-2.588 0l-.055-.183a1.26 1.26 0 01-.915-.915l-.183-.055c-1.363-.412-1.363-2.176 0-2.588l.183-.055a1.26 1.26 0 01.915-.915l.055-.183zM10 3.25a.75.75 0 01.75.75v.01a.75.75 0 01-1.5 0V4A.75.75 0 0110 3.25zM10 8.5a.75.75 0 01.75.75v.01a.75.75 0 01-1.5 0V9.25A.75.75 0 0110 8.5zM7.25 10a.75.75 0 000 1.5h.01a.75.75 0 000-1.5H7.25zM12.75 10a.75.75 0 000 1.5h.01a.75.75 0 000-1.5H12.75z" /></svg>
+                        </div>
+                        <h4 class="mt-4 font-semibold text-gray-700">AI Inquiry Summarizer</h4>
+                    </div>
+                     <div class="flex flex-col items-center">
+                        <div class="flex items-center justify-center h-12 w-12 rounded-full bg-apricot text-gold">
+                            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                        </div>
+                        <h4 class="mt-4 font-semibold text-gray-700">AI Contract Generation</h4>
+                    </div>
+                     <div class="flex flex-col items-center">
+                        <div class="flex items-center justify-center h-12 w-12 rounded-full bg-apricot text-gold">
+                           <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+                        </div>
+                        <h4 class="mt-4 font-semibold text-gray-700">AI Floorplan Visualization</h4>
+                    </div>
+                     <div class="flex flex-col items-center">
+                        <div class="flex items-center justify-center h-12 w-12 rounded-full bg-apricot text-gold">
+                           <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.653-.184-1.268-.5-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.653.184-1.268.5-1.857m0 0a5.002 5.002 0 019 0m-4.5 4.5V12"></path></svg>
+                        </div>
+                        <h4 class="mt-4 font-semibold text-gray-700">AI Seating Chart Assistant</h4>
+                    </div>
+                 </div>
+            </div>
+
+            <form class="mt-8 space-y-8 bg-white p-8 rounded-lg shadow-xl" action="#" method="POST">
+                
+                <!-- Step 1: Choose Your Plan -->
+                <div>
+                    <h3 class="text-lg font-medium leading-6 text-gray-900">Step 1: Choose Your Plan</h3>
+                    <div id="planSelection" class="mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <!-- Advertising Only Plan -->
+                        <div class="plan-card relative p-6 border rounded-lg cursor-pointer flex flex-col" data-plan="advertising">
+                            <h4 class="font-bold text-gray-800">Advertising Only</h4>
+                            <p class="mt-1 text-sm text-gray-500">Get listed in our directory.</p>
+                            <p class="mt-4">
+                                <span class="text-3xl font-extrabold text-gray-900">$29.99</span>
+                                <span class="text-base font-medium text-gray-500">/mo</span>
+                            </p>
+                            <ul class="mt-4 space-y-2 text-sm text-gray-600 flex-grow">
+                                <li class="flex items-center font-bold text-gold"><svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>[FEATURED VENDOR]</li>
+                                <li class="flex items-center"><svg class="w-4 h-4 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>1 Vendor Profile</li>
+                                <li class="flex items-center"><svg class="w-4 h-4 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>2 User Log-ins</li>
+                            </ul>
+                            <div class="absolute top-4 right-4 h-5 w-5 rounded-full border border-gray-300 flex items-center justify-center">
+                                <span class="check-mark hidden h-3 w-3 rounded-full bg-amber-500"></span>
+                            </div>
+                        </div>
+
+                        <!-- Basic Plan -->
+                        <div class="plan-card relative p-6 border rounded-lg cursor-pointer flex flex-col" data-plan="basic">
+                            <h4 class="font-bold text-gray-800">Basic</h4>
+                            <p class="mt-1 text-sm text-gray-500">For small teams and solo entrepreneurs.</p>
+                            <p class="mt-4">
+                                <span class="text-3xl font-extrabold text-gray-900">$69.99</span>
+                                <span class="text-base font-medium text-gray-500">/mo</span>
+                            </p>
+                            <ul class="mt-4 space-y-2 text-sm text-gray-600 flex-grow">
+                                <li class="font-bold text-brown">Client Management Tools:</li>
+                                <li class="flex items-center pl-4"><svg class="w-4 h-4 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Proposals, Contracts, Invoices</li>
+                                <li class="flex items-center pl-4"><svg class="w-4 h-4 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Client Workspace Tools</li>
+                                <li class="flex items-center mt-2"><svg class="w-4 h-4 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>2 User Log-ins</li>
+                                <li class="flex items-center"><svg class="w-4 h-4 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Standard Reporting</li>
+                            </ul>
+                            <div class="mt-4 pt-4 border-t">
+                                <label class="flex items-center"><input type="checkbox" class="h-4 w-4 text-amber-600 border-gray-300 rounded focus:ring-gold"><span class="ml-2 text-sm text-gray-700">Add Featured Profile <span class="font-bold">($10/mo)</span></span></label>
+                            </div>
+                            <div class="absolute top-4 right-4 h-5 w-5 rounded-full border border-gray-300 flex items-center justify-center">
+                                <span class="check-mark hidden h-3 w-3 rounded-full bg-amber-500"></span>
+                            </div>
+                        </div>
+                        <!-- Pro Plan -->
+                        <div class="plan-card relative p-6 border rounded-lg cursor-pointer flex flex-col" data-plan="pro">
+                             <h4 class="font-bold text-gray-800">Pro</h4>
+                            <p class="mt-1 text-sm text-gray-500">For established businesses.</p>
+                            <p class="mt-4">
+                                <span class="text-3xl font-extrabold text-gray-900">$99.99</span>
+                                <span class="text-base font-medium text-gray-500">/mo</span>
+                            </p>
+                             <ul class="mt-4 space-y-2 text-sm text-gray-600 flex-grow">
+                                <li class="flex items-center"><svg class="w-4 h-4 mr-2 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Everything in Basic, plus:</li>
+                                <li class="flex items-center"><svg class="w-4 h-4 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>2 Vendor Profiles</li>
+                                <li class="flex items-center"><svg class="w-4 h-4 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>4 User Log-ins</li>
+                                <li class="flex items-center"><svg class="w-4 h-4 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Advanced Reporting & KPIs</li>
+                                <li class="flex items-center"><svg class="w-4 h-4 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>SMS Reminders & Priority Support</li>
+                            </ul>
+                            <div class="mt-4 pt-4 border-t">
+                                <label for="pro-featured" class="block text-sm text-gray-700">Feature Profiles ($10/mo per profile)</label>
+                                <select id="pro-featured" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm sm:text-sm">
+                                    <option>0 Profiles</option>
+                                    <option>1 Profile (+$10)</option>
+                                    <option>2 Profiles (+$20)</option>
+                                </select>
+                            </div>
+                            <div class="absolute top-4 right-4 h-5 w-5 rounded-full border border-gray-300 flex items-center justify-center">
+                                <span class="check-mark hidden h-3 w-3 rounded-full bg-amber-500"></span>
+                            </div>
+                        </div>
+                        <!-- Enterprise Plan -->
+                         <div class="plan-card relative p-6 border rounded-lg cursor-pointer flex flex-col" data-plan="enterprise">
+                             <h4 class="font-bold text-gray-800">Enterprise</h4>
+                            <p class="mt-1 text-sm text-gray-500">For multi-brand businesses.</p>
+                            <p class="mt-4">
+                                <span class="text-3xl font-extrabold text-gray-900">$199.99</span>
+                                <span class="text-base font-medium text-gray-500">/mo</span>
+                            </p>
+                             <ul class="mt-4 space-y-2 text-sm text-gray-600 flex-grow">
+                                <li class="flex items-center"><svg class="w-4 h-4 mr-2 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Everything in Pro, plus:</li>
+                                <li class="flex items-center"><svg class="w-4 h-4 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>4 Vendor Profiles</li>
+                                <li class="flex items-center"><svg class="w-4 h-4 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>10 User Log-ins</li>
+                                <li class="flex items-center"><svg class="w-4 h-4 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Dedicated Account Manager</li>
+                            </ul>
+                            <div class="mt-4 pt-4 border-t">
+                                 <label for="ent-featured" class="block text-sm text-gray-700">Feature Profiles ($10/mo per profile)</label>
+                                <select id="ent-featured" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm sm:text-sm">
+                                    <option>0 Profiles</option>
+                                    <option>1 Profile (+$10)</option>
+                                    <option>2 Profiles (+$20)</option>
+                                    <option>3 Profiles (+$30)</option>
+                                    <option>4 Profiles (+$40)</option>
+                                </select>
+                            </div>
+                            <div class="absolute top-4 right-4 h-5 w-5 rounded-full border border-gray-300 flex items-center justify-center">
+                                <span class="check-mark hidden h-3 w-3 rounded-full bg-amber-500"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2 & 3 -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                     <div>
+                        <h3 class="text-lg font-medium leading-6 text-gray-900">Step 2: Business Information</h3>
+                        <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div class="sm:col-span-2">
+                                 <label for="business-name" class="block text-sm font-medium text-gray-700">Business Name</label>
+                                 <input type="text" name="business-name" id="business-name" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                            </div>
+                             <div>
+                                <label for="vendor-type" class="block text-sm font-medium text-gray-700">Vendor Type</label>
+                                <select id="vendor-type" name="vendor-type" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-gold focus:border-gold sm:text-sm">
+                                    <option>Photographer</option>
+                                    <option>Venue</option>
+                                    <option>Florist</option>
+                                    <option>Other</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="business-location" class="block text-sm font-medium text-gray-700">Location</label>
+                                <input type="text" name="business-location" id="business-location" placeholder="e.g., Honolulu, HI" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-medium leading-6 text-gray-900">Step 3: Create Your Account</h3>
+                        <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div>
+                                 <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
+                                 <input type="email" name="email" id="email" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                            </div>
+                             <div>
+                                 <label for="phone" class="block text-sm font-medium text-gray-700">Phone Number</label>
+                                 <input type="tel" name="phone" id="phone" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                            </div>
+                            <div>
+                                <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                                <input type="password" name="password" id="password" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                            </div>
+                             <div>
+                                <label for="confirm-password" class="block text-sm font-medium text-gray-700">Confirm Password</label>
+                                <input type="password" name="confirm-password" id="confirm-password" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Billing & Terms -->
+                 <div class="pt-8 border-t">
+                    <h3 class="text-lg font-medium text-gray-900">Billing Information</h3>
+                    <p class="mt-2 text-sm text-gray-500">By creating an account, you agree to our terms of service. Your chosen plan is a monthly subscription that will be automatically charged to your card on file on the 1st of each month. Subscriptions can be canceled at any time. To avoid the next month's charge, cancellations must be made at least 5 days before the 1st of the month. No refunds will be issued for cancellations made within this 5-day window.</p>
+                </div>
+
+                <div>
+                    <button type="submit" class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-golden-brown hover:bg-golden-brown-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gold">
+                        Create My Vendor Account
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const planSelection = document.getElementById('planSelection');
+            planSelection.addEventListener('click', (e) => {
+                const selectedCard = e.target.closest('.plan-card');
+                if (!selectedCard) return;
+
+                document.querySelectorAll('.plan-card').forEach(card => {
+                    card.classList.remove('selected', 'ring-2', 'border-gold');
+                    const checkMark = card.querySelector('.check-mark');
+                    if(checkMark) checkMark.classList.add('hidden');
+                });
+                
+                selectedCard.classList.add('selected', 'ring-2', 'border-gold');
+                 const checkMark = selectedCard.querySelector('.check-mark');
+                if(checkMark) checkMark.classList.remove('hidden');
+            });
+        });
+    </script>
+</body>
+</html>

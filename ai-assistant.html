@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Assistant - Bridely.ai</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #FFFBEB; /* Amber Background */
+        }
+        /* Custom Colors */
+        .bg-olive { background-color: #365314; }
+        .text-olive { color: #365314; }
+        .text-gold { color: #B45309; }
+        .bg-golden-brown { background-color: #92400E; }
+        .hover\:bg-golden-brown-dark:hover { background-color: #78350F; }
+        
+        #chat-window {
+            scroll-behavior: smooth;
+        }
+        .message {
+            max-width: 75%;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Navigation (Couple's View) -->
+    <nav class="bg-olive shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                 <div class="flex-shrink-0">
+                    <a href="/landing-page.html" class="text-2xl font-bold text-white">bridely.ai</a>
+                </div>
+                <div class="hidden sm:ml-6 sm:flex sm:items-center">
+                    <a href="#" class="text-sm font-medium text-gray-300 hover:text-white">Back to Dashboard</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Chat Interface -->
+    <main class="py-8">
+        <div class="max-w-3xl mx-auto">
+            <div class="bg-white rounded-lg shadow-lg flex flex-col" style="height: calc(100vh - 8rem);">
+                <!-- Chat Header -->
+                <div class="p-4 border-b flex items-center">
+                    <div class="relative w-10 h-10">
+                        <img class="w-10 h-10 rounded-full object-cover" src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Bridely AI Assistant Avatar">
+                         <span class="absolute bottom-0 right-0 block h-2.5 w-2.5 rounded-full bg-green-400 ring-2 ring-white"></span>
+                    </div>
+                    <div class="ml-3">
+                        <p class="text-lg font-semibold text-gray-800">Bridely</p>
+                        <p class="text-sm text-gray-500">Online</p>
+                    </div>
+                </div>
+                
+                <!-- Chat Window -->
+                <div id="chat-window" class="flex-1 p-6 overflow-y-auto">
+                    <!-- Initial AI Message -->
+                    <div class="flex">
+                        <div class="bg-gray-200 text-gray-800 p-3 rounded-lg message">
+                            <p>Hello Jane! I am your personal AI planning assistant, Bridely. How can I help you today? You can ask me anything from "What questions should I ask a venue?" to "Suggest a color palette for a modern wedding."</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Suggested Prompts -->
+                <div class="p-4 border-t">
+                     <div class="flex flex-wrap gap-2">
+                        <button class="prompt-btn text-xs bg-amber-100 hover:bg-amber-200 text-brown py-1 px-3 rounded-full">Suggest florists in Honolulu</button>
+                        <button class="prompt-btn text-xs bg-amber-100 hover:bg-amber-200 text-brown py-1 px-3 rounded-full">When should I send invitations?</button>
+                        <button class="prompt-btn text-xs bg-amber-100 hover:bg-amber-200 text-brown py-1 px-3 rounded-full">How to handle guest accommodations?</button>
+                    </div>
+                </div>
+
+                <!-- Input Form -->
+                <div class="p-4 bg-gray-50 border-t">
+                    <form id="chat-form" class="flex items-center">
+                        <input type="text" id="message-input" class="flex-1 border-gray-300 rounded-lg shadow-sm focus:ring-gold focus:border-gold" placeholder="Type your message..." autocomplete="off">
+                        <button type="submit" class="ml-4 inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-golden-brown hover:bg-golden-brown-dark">
+                            Send
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const chatWindow = document.getElementById('chat-window');
+            const chatForm = document.getElementById('chat-form');
+            const messageInput = document.getElementById('message-input');
+            const promptBtns = document.querySelectorAll('.prompt-btn');
+
+            const addMessage = (message, sender) => {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `flex my-2 ${sender === 'user' ? 'justify-end' : ''}`;
+                
+                const messageBubble = document.createElement('div');
+                messageBubble.className = `p-3 rounded-lg message ${sender === 'user' ? 'bg-golden-brown text-white' : 'bg-gray-200 text-gray-800'}`;
+                messageBubble.innerHTML = `<p>${message}</p>`;
+                
+                messageDiv.appendChild(messageBubble);
+                chatWindow.appendChild(messageDiv);
+                chatWindow.scrollTop = chatWindow.scrollHeight;
+            };
+
+            const aiTyping = () => {
+                const typingDiv = document.createElement('div');
+                typingDiv.id = 'typing-indicator';
+                typingDiv.className = 'flex my-2';
+                typingDiv.innerHTML = `<div class="bg-gray-200 text-gray-500 p-3 rounded-lg message"><span>●</span><span class="animate-ping">●</span><span>●</span></div>`;
+                chatWindow.appendChild(typingDiv);
+                chatWindow.scrollTop = chatWindow.scrollHeight;
+            };
+            
+            const removeTyping = () => {
+                const indicator = document.getElementById('typing-indicator');
+                if (indicator) indicator.remove();
+            };
+
+            const handleUserMessage = (message) => {
+                addMessage(message, 'user');
+                messageInput.value = '';
+
+                aiTyping();
+
+                // Simulate AI response
+                setTimeout(() => {
+                    removeTyping();
+                    let aiResponse;
+                    const lowerCaseMessage = message.toLowerCase();
+
+                    if(lowerCaseMessage.includes('florists')) {
+                        aiResponse = "Of course! Based on your Honolulu location and modern aesthetic, here are a few highly-rated florists from the Bridely.ai network:<br><br>1. <strong>Paradise Blooms</strong> (5.0 stars)<br>2. <strong>Island Petals</strong> (4.8 stars)<br>3. <strong>Urban Jungle HI</strong> (4.7 stars)<br><br>Would you like to send them an inquiry?";
+                    } else if (lowerCaseMessage.includes('invitations')) {
+                        aiResponse = "For a wedding in October 2026, it's best to send your invitations out about 3-4 months beforehand. So, you should aim to mail them between June and July of 2026. This gives your guests plenty of time to make arrangements!";
+                    } else {
+                        aiResponse = `That's a more detailed question! While I'm still learning, you can get expert advice on this by emailing our sister company at <a href="https://sbwedding.co/contact" target="_blank" class="text-gold hover:underline">sbwedding.co</a>. They offer free consultations and would be happy to help!`;
+                    }
+                    addMessage(aiResponse, 'ai');
+                }, 2000);
+            }
+
+            chatForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const message = messageInput.value.trim();
+                if (message) {
+                    handleUserMessage(message);
+                }
+            });
+            
+            promptBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const promptText = btn.textContent;
+                    messageInput.value = promptText;
+                    handleUserMessage(promptText);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+

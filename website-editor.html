@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Editor - Bridely.ai</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lora:ital,wght@0,400;1,400&family=Montserrat:wght@400;700&display=swap">
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #FFFBEB; /* Amber Background */
+        }
+        /* Custom Colors */
+        .bg-olive { background-color: #365314; }
+        .text-olive { color: #365314; }
+        .text-gold { color: #B45309; }
+        .border-gold { border-color: #B45309; }
+        .focus\:ring-gold:focus { --tw-ring-color: #B45309; }
+        .text-brown { color: #78350F; }
+        .bg-golden-brown { background-color: #92400E; }
+        .hover\:bg-golden-brown-dark:hover { background-color: #78350F; }
+        .bg-apricot { background-color: #FFEDD5; }
+        
+        /* Font Themes */
+        .font-theme-classic .preview-font-heading { font-family: 'Playfair Display', serif; }
+        .font-theme-classic .preview-font-body { font-family: 'Lora', serif; }
+        .font-theme-modern .preview-font-heading { font-family: 'Montserrat', sans-serif; font-weight: 700; }
+        .font-theme-modern .preview-font-body { font-family: 'Inter', sans-serif; }
+
+        .editor-sidebar {
+            position: sticky;
+            top: 4rem; /* Nav height */
+            height: calc(100vh - 4rem); 
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Navigation -->
+    <nav class="bg-olive shadow-md fixed top-0 w-full z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0">
+                    <a href="/landing-page.html" class="text-2xl font-bold text-white">bridely.ai</a>
+                </div>
+                <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
+                    <a href="/dashboard.html" class="text-gray-300 hover:text-white text-sm font-medium">Dashboard</a>
+                    <a href="/website-editor.html" class="text-amber-300 border-amber-300 border-b-2 text-sm font-medium">Website</a>
+                </div>
+                 <div class="hidden sm:ml-6 sm:flex sm:items-center">
+                    <button class="text-sm font-medium text-amber-300 hover:text-white">Publish Site</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="pt-16">
+        <div class="flex">
+            <!-- Left: Editor Sidebar -->
+            <aside class="w-1/3 bg-white p-6 border-r border-gray-200 editor-sidebar">
+                <h2 class="text-xl font-bold text-olive mb-6">Website Editor</h2>
+                <div class="space-y-8">
+                    <!-- Theme Section -->
+                    <div class="space-y-4">
+                        <h3 class="font-semibold text-gray-800">Theme & Style</h3>
+                        <div>
+                            <label for="color-palette" class="block text-sm font-medium text-gray-700">Color Palette</label>
+                            <select id="color-palette" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-gold focus:border-gold sm:text-sm">
+                                <option value="olive-gold">Olive & Gold</option>
+                                <option value="paprika-apricot">Paprika & Apricot</option>
+                                <option value="crimson-brown">Crimson & Brown</option>
+                            </select>
+                        </div>
+                         <div>
+                            <label for="font-theme" class="block text-sm font-medium text-gray-700">Font Theme</label>
+                            <select id="font-theme" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-gold focus:border-gold sm:text-sm">
+                                <option value="classic">Classic (Serif)</option>
+                                <option value="modern">Modern (Sans-Serif)</option>
+                            </select>
+                        </div>
+                    </div>
+                     <!-- General Info Section -->
+                    <div class="space-y-4 pt-6 border-t">
+                        <h3 class="font-semibold text-gray-800">General Information</h3>
+                        <div>
+                            <label for="couple-names" class="block text-sm font-medium text-gray-700">Couple's Names</label>
+                            <input type="text" id="couple-names" value="Jane & John" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                        </div>
+                        <div>
+                            <label for="wedding-date-input" class="block text-sm font-medium text-gray-700">Wedding Date</label>
+                            <input type="text" id="wedding-date-input" value="October 26, 2026" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                        </div>
+                         <div>
+                            <label for="location-input" class="block text-sm font-medium text-gray-700">Location</label>
+                            <input type="text" id="location-input" value="Honolulu, HI" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                        </div>
+                         <div>
+                            <label for="welcome-message" class="block text-sm font-medium text-gray-700">Welcome Message</label>
+                            <textarea id="welcome-message" rows="3" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">Welcome to our wedding website! We can't wait to celebrate our special day with you.</textarea>
+                        </div>
+                         <div>
+                            <label for="hero-image" class="block text-sm font-medium text-gray-700">Header Image</label>
+                            <input type="file" id="hero-image-input" class="mt-1 text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-apricot file:text-brown hover:file:bg-amber-200"/>
+                        </div>
+                    </div>
+
+                    <!-- Page Sections -->
+                     <div class="space-y-4 pt-6 border-t">
+                         <h3 class="font-semibold text-gray-800">Page Sections</h3>
+                        <div>
+                            <label for="our-story" class="block text-sm font-medium text-gray-700">Our Story</label>
+                            <textarea id="our-story" rows="5" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">Our story began on the beautiful shores of Hawaii...</textarea>
+                            <label for="our-story-photo" class="mt-2 block text-sm font-medium text-gray-700">Our Story Photo</label>
+                            <input type="file" id="our-story-photo" class="mt-1 text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-apricot file:text-brown hover:file:bg-amber-200"/>
+                        </div>
+                         <div id="wedding-party-editor">
+                            <label class="block text-sm font-medium text-gray-700">Wedding Party</label>
+                            <div id="wedding-party-members-container" class="mt-2 space-y-4">
+                                <!-- Wedding party members will be dynamically added here -->
+                            </div>
+                            <button id="add-party-member" type="button" class="mt-2 text-sm font-medium text-gold hover:text-brown">+ Add Member</button>
+                        </div>
+                         <div id="schedule-editor">
+                            <label class="block text-sm font-medium text-gray-700 mt-4">Schedule of Events</label>
+                            <div id="schedule-items-container" class="mt-2 space-y-4">
+                                <!-- Schedule items will be dynamically added here -->
+                            </div>
+                            <button id="add-schedule-item" type="button" class="mt-2 text-sm font-medium text-gold hover:text-brown">+ Add Event</button>
+                        </div>
+                         <div>
+                            <label for="travel" class="block text-sm font-medium text-gray-700 mt-4">Travel & Transportation</label>
+                            <textarea id="travel" rows="5" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="e.g., Hotel Block: The Grand Hotel. Shuttle service provided from the hotel."></textarea>
+                        </div>
+                         <div>
+                            <label for="faq" class="block text-sm font-medium text-gray-700">FAQ</label>
+                            <textarea id="faq" rows="5" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="e.g., Q: What is the dress code? A: Semi-Formal."></textarea>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Right: Live Preview -->
+            <div class="w-2/3 bg-gray-200 p-8 overflow-y-auto">
+                <div id="website-preview" class="max-w-4xl mx-auto bg-white rounded-lg shadow-lg font-theme-classic">
+                    <!-- Preview Header -->
+                    <header id="preview-header" class="relative text-center text-white h-auto py-20 flex items-center justify-center bg-cover bg-center" style="background-image: url('https://placehold.co/1200x800/92400E/FFFFFF?text=J+%26+J');">
+                        <div class="absolute inset-0 bg-black opacity-40"></div>
+                        <div class="relative z-10 p-8 md:p-12">
+                            <h1 id="preview-couple-names" class="text-5xl md:text-7xl font-bold preview-font-heading">Jane & John</h1>
+                            <p id="preview-wedding-date" class="mt-4 text-lg preview-font-body">October 26, 2026</p>
+                            <p id="preview-location" class="mt-1 text-lg preview-font-body">Honolulu, HI</p>
+                            <p id="preview-welcome-message" class="mt-6 max-w-xl mx-auto text-base preview-font-body leading-relaxed">Welcome to our wedding website! We can't wait to celebrate our special day with you.</p>
+                        </div>
+                    </header>
+                    <!-- Preview Nav -->
+                    <nav class="bg-white border-b sticky top-0 z-30">
+                        <ul class="flex justify-center space-x-8 py-4">
+                            <li><a href="#preview-story" class="text-gray-600 hover:text-gold font-medium preview-font-body">Our Story</a></li>
+                             <li><a href="#preview-party" class="text-gray-600 hover:text-gold font-medium preview-font-body">Wedding Party</a></li>
+                            <li><a href="#preview-schedule" class="text-gray-600 hover:text-gold font-medium preview-font-body">Schedule</a></li>
+                            <li><a href="#preview-travel" class="text-gray-600 hover:text-gold font-medium preview-font-body">Travel</a></li>
+                             <li><a href="#preview-faq" class="text-gray-600 hover:text-gold font-medium preview-font-body">FAQ</a></li>
+                            <li><a href="#" class="px-4 py-1 text-white bg-golden-brown rounded-full hover:bg-golden-brown-dark font-medium preview-font-body">RSVP</a></li>
+                        </ul>
+                    </nav>
+                    <!-- Preview Body -->
+                    <div class="p-8 md:p-16 space-y-16">
+                        <section id="preview-story" class="text-center"><h2 class="text-4xl preview-font-heading text-olive">Our Story</h2><div class="w-24 h-1 bg-gold mx-auto mt-4 mb-8"></div><div class="flex flex-col md:flex-row items-center gap-8"><img id="preview-story-photo" class="w-48 h-48 rounded-full object-cover shadow-lg" src="https://placehold.co/400x400/92400E/FFFFFF?text=Us"><p class="text-gray-600 max-w-2xl mx-auto preview-font-body whitespace-pre-wrap leading-relaxed">Our story began on the beautiful shores of Hawaii...</p></div></section>
+                        <section id="preview-party" class="text-center"><h2 class="text-4xl preview-font-heading text-olive">The Wedding Party</h2><div class="w-24 h-1 bg-gold mx-auto mt-4 mb-8"></div><div id="preview-party-grid" class="grid grid-cols-2 md:grid-cols-4 gap-8"></div></section>
+                        <section id="preview-schedule" class="text-center"><h2 class="text-4xl preview-font-heading text-olive">Schedule of Events</h2><div class="w-24 h-1 bg-gold mx-auto mt-4 mb-8"></div><div class="text-gray-600 max-w-2xl mx-auto preview-font-body flex flex-col space-y-6"></div></section>
+                        <section id="preview-travel" class="text-center"><h2 class="text-4xl preview-font-heading text-olive">Travel & Transportation</h2><div class="w-24 h-1 bg-gold mx-auto mt-4 mb-8"></div><p class="text-gray-600 max-w-2xl mx-auto preview-font-body whitespace-pre-wrap leading-relaxed"></p></section>
+                        <section id="preview-faq" class="text-center"><h2 class="text-4xl preview-font-heading text-olive">Q & A</h2><div class="w-24 h-1 bg-gold mx-auto mt-4 mb-8"></div><p class="text-gray-600 max-w-2xl mx-auto preview-font-body whitespace-pre-wrap leading-relaxed"></p></section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const editorFields = {
+                'couple-names': 'preview-couple-names',
+                'wedding-date-input': 'preview-wedding-date',
+                'location-input': 'preview-location',
+                'welcome-message': 'preview-welcome-message',
+                'our-story': '#preview-story > div > p',
+                'travel': '#preview-travel > p',
+                'faq': '#preview-faq > p'
+            };
+            
+            const heroImageInput = document.getElementById('hero-image-input');
+            const previewHeader = document.getElementById('preview-header');
+            const colorPaletteSelect = document.getElementById('color-palette');
+            const fontThemeSelect = document.getElementById('font-theme');
+            const websitePreview = document.getElementById('website-preview');
+            const scheduleItemsContainer = document.getElementById('schedule-items-container');
+            const addScheduleItemBtn = document.getElementById('add-schedule-item');
+            const ourStoryPhotoInput = document.getElementById('our-story-photo');
+            const partyMembersContainer = document.getElementById('wedding-party-members-container');
+            const addPartyMemberBtn = document.getElementById('add-party-member');
+            
+            let weddingPartyData = [];
+
+            const updatePreview = () => {
+                for (const id in editorFields) {
+                    const input = document.getElementById(id);
+                    const previewEl = document.querySelector(editorFields[id]);
+                    if (input && previewEl) previewEl.textContent = input.value;
+                }
+                updateSchedulePreview();
+                updateWeddingPartyPreview();
+            };
+            
+            const updateSchedulePreview = () => {
+                const schedulePreview = document.querySelector('#preview-schedule > div');
+                schedulePreview.innerHTML = '';
+                document.querySelectorAll('.schedule-item').forEach(item => {
+                    const title = item.querySelector('.schedule-title').value || 'Event';
+                    const time = item.querySelector('.schedule-time').value || 'TBD';
+                    const location = item.querySelector('.schedule-location').value || 'TBD';
+                    schedulePreview.innerHTML += `<div class="mb-4"><h3 class="text-xl font-semibold text-gray-800">${title}</h3><p class="text-gray-500">${time}</p><p class="text-sm italic text-gray-500">${location}</p></div>`;
+                });
+            };
+
+            const updateWeddingPartyPreview = () => {
+                const partyGrid = document.getElementById('preview-party-grid');
+                partyGrid.innerHTML = '';
+                weddingPartyData.forEach(member => {
+                    partyGrid.innerHTML += `
+                        <div class="text-center">
+                            <img src="${member.photoSrc || 'https://placehold.co/200x200/CBD5E1/475569?text=Photo'}" class="w-32 h-32 rounded-full object-cover shadow-lg mx-auto">
+                            <h4 class="mt-4 font-semibold text-gray-800">${member.name || 'Name'}</h4>
+                            <p class="text-sm text-gray-500">${member.role || 'Role'}</p>
+                        </div>
+                    `;
+                });
+            };
+
+            const addScheduleItem = (title = '', time = '', location = '') => { /* ... existing code ... */ };
+            
+            const addPartyMember = (name = '', role = '') => {
+                const index = weddingPartyData.length;
+                weddingPartyData.push({name, role, photoSrc: ''});
+
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'party-member-item border-t pt-4';
+                itemDiv.dataset.index = index;
+                itemDiv.innerHTML = `
+                    <input type="text" value="${name}" placeholder="Full Name" class="party-member-name block w-full shadow-sm sm:text-sm border-gray-300 rounded-md mb-2">
+                    <input type="text" value="${role}" placeholder="Role (e.g., Maid of Honor)" class="party-member-role block w-full shadow-sm sm:text-sm border-gray-300 rounded-md mb-2">
+                    <input type="file" class="party-member-photo mt-1 text-sm text-gray-500 file:text-xs file:mr-2 file:py-1 file:px-2 file:rounded-md file:border-0 file:font-semibold file:bg-apricot file:text-brown"/>
+                `;
+                partyMembersContainer.appendChild(itemDiv);
+                updateWeddingPartyPreview();
+            };
+
+            partyMembersContainer.addEventListener('input', e => {
+                 const target = e.target;
+                 const itemDiv = target.closest('.party-member-item');
+                 const index = itemDiv.dataset.index;
+                 if(target.classList.contains('party-member-name')) weddingPartyData[index].name = target.value;
+                 if(target.classList.contains('party-member-role')) weddingPartyData[index].role = target.value;
+                 updateWeddingPartyPreview();
+            });
+
+             partyMembersContainer.addEventListener('change', e => {
+                 const target = e.target;
+                 if(target.classList.contains('party-member-photo')) {
+                     const itemDiv = target.closest('.party-member-item');
+                     const index = itemDiv.dataset.index;
+                     const file = target.files[0];
+                     if(file) {
+                         const reader = new FileReader();
+                         reader.onload = (re) => {
+                             weddingPartyData[index].photoSrc = re.target.result;
+                             updateWeddingPartyPreview();
+                         };
+                         reader.readAsDataURL(file);
+                     }
+                 }
+            });
+
+
+            addPartyMemberBtn.addEventListener('click', () => addPartyMember());
+
+            ourStoryPhotoInput.addEventListener('change', (event) => {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                       document.getElementById('preview-story-photo').src = e.target.result;
+                    }
+                    reader.readAsDataURL(file);
+                }
+            });
+
+
+            // Initial Event Listeners
+            for (const id in editorFields) {
+                document.getElementById(id)?.addEventListener('input', updatePreview);
+            }
+            addScheduleItemBtn.addEventListener('click', () => addScheduleItem());
+            heroImageInput.addEventListener('change', (event) => { /* ... existing code ... */ });
+            fontThemeSelect.addEventListener('change', (e) => {
+                websitePreview.className = websitePreview.className.replace(/font-theme-\w+/, `font-theme-${e.target.value}`);
+            });
+            colorPaletteSelect.addEventListener('change', () => alert('Color palette changed! (This would update all colors in a real application)'));
+            
+            // Initial Setup
+            addScheduleItem('Ceremony', '4:00 PM', 'The Grand Ballroom');
+            addScheduleItem('Reception', '6:00 PM', 'Starlight Terrace');
+            addPartyMember('Jessica Doe', 'Maid of Honor');
+            addPartyMember('Michael Smith', 'Best Man');
+            updatePreview();
+        });
+    </script>
+</body>
+</html>

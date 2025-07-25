@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Bridely.ai</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #064E3B;
+        }
+        .font-heading {
+            font-family: 'Playfair Display', serif;
+        }
+        #chat-container {
+            max-width: 800px;
+            height: 100vh;
+            max-height: 900px;
+        }
+        .chat-message {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.5s forwards;
+        }
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body class="text-gray-200">
+
+
+    <div id="chat-container" class="mx-auto flex flex-col h-screen p-4">
+        <header class="text-center py-4">
+            <h1 class="text-4xl font-bold text-white font-heading">bridely.ai</h1>
+            <p class="text-amber-200">Planning Made Simple, Powered by AI</p>
+        </header>
+
+
+        <div id="chat-window" class="flex-1 p-6 overflow-y-auto space-y-6">
+            <!-- Chat messages will be appended here -->
+        </div>
+
+
+        <div id="input-area" class="p-4">
+            <div id="button-options" class="flex flex-wrap gap-2 mb-4 justify-center"></div>
+            <form id="chat-form" class="flex items-center space-x-4">
+                <input type="text" id="message-input" class="flex-1 bg-green-800 border-green-700 rounded-lg shadow-sm text-white placeholder-gray-400 focus:ring-amber-500 focus:border-amber-500" placeholder="Type your answer..." autocomplete="off">
+                <button type="submit" class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-amber-600 hover:bg-amber-700">
+                    Send
+                </button>
+            </form>
+        </div>
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const chatWindow = document.getElementById('chat-window');
+            const chatForm = document.getElementById('chat-form');
+            const messageInput = document.getElementById('message-input');
+            const inputArea = document.getElementById('input-area');
+            const buttonOptions = document.getElementById('button-options');
+
+
+            let step = 0;
+            const userData = {};
+            const questions = [
+                { question: "Hello! I'm Bridely, your personal AI wedding planner. By answering a few simple questions, I can instantly create a personalized wedding checklist and a list of vendor recommendations just for you. Let's get started! First, what are your names?", key: 'names', type: 'text' },
+                { question: "It's so lovely to meet you, {names}! Now for the fun part. What's your planned wedding date?", key: 'date', type: 'date' },
+                { question: "And where are you planning to celebrate? (e.g., Honolulu, HI)", key: 'location', type: 'text' },
+                { question: "Roughly how many guests are you expecting?", key: 'guests', type: 'number' },
+                { question: "That sounds wonderful. What is your estimated budget for the big day?", key: 'budget', type: 'text' },
+                { question: "To help me personalize your vendor recommendations, which of these styles best describes your wedding vibe?", key: 'style', type: 'buttons', options: ['Classic & Traditional', 'Modern & Chic', 'Bohemian & Rustic', 'Glamorous & Romantic'] },
+                { question: "Amazing! I have everything I need to build your personalized planning dashboard. What's the best email address to create your free account and save your plan?", key: 'email', type: 'email' },
+                { question: "And finally, please create a secure password for your account.", key: 'password', type: 'password' },
+                { question: `All set! Your free Bridely.ai account is ready with all the planning essentials. You can immediately start using:
+                            <ul class="list-disc list-inside mt-2 space-y-1">
+                                <li>A personalized milestone checklist</li>
+                                <li>An AI-powered budget tracker</li>
+                                <li>Your own wedding website for RSVPs & announcements</li>
+                                <li>Smart vendor recommendations</li>
+                            </ul>
+                            <p class="mt-2">You can unlock even more powerful tools as you complete your planning milestones. Click below to access your free dashboard and start planning!</p>` }
+            ];
+
+
+            const addMessage = (message, sender, delay = 0) => {
+                return new Promise(resolve => {
+                    setTimeout(() => {
+                        const messageWrapper = document.createElement('div');
+                        messageWrapper.className = `chat-message flex ${sender === 'user' ? 'justify-end' : 'justify-start'}`;
+                       
+                        const messageBubble = document.createElement('div');
+                        messageBubble.className = `p-3 rounded-lg max-w-lg ${sender === 'user' ? 'bg-amber-600 text-white' : 'bg-green-700 text-gray-200'}`;
+                        messageBubble.innerHTML = `<p>${message}</p>`;
+                       
+                        messageWrapper.appendChild(messageBubble);
+                        chatWindow.appendChild(messageWrapper);
+                        chatWindow.scrollTop = chatWindow.scrollHeight;
+                        resolve();
+                    }, delay);
+                });
+            };
+
+
+            const handleNextStep = () => {
+                const currentStep = questions[step];
+                if (!currentStep) return;
+
+
+                let questionText = currentStep.question.replace('{names}', userData.names);
+               
+                addMessage(questionText, 'ai', 500).then(() => {
+                    if (currentStep.type === 'buttons') {
+                        chatForm.style.display = 'none';
+                        buttonOptions.innerHTML = '';
+                        currentStep.options.forEach(option => {
+                            const button = document.createElement('button');
+                            button.textContent = option;
+                            button.className = 'bg-green-700 hover:bg-green-600 text-white text-sm font-medium py-2 px-4 rounded-lg';
+                            button.onclick = () => {
+                                userData[currentStep.key] = option;
+                                addMessage(option, 'user');
+                                buttonOptions.innerHTML = '';
+                                chatForm.style.display = 'flex';
+                                step++;
+                                handleNextStep();
+                            };
+                            buttonOptions.appendChild(button);
+                        });
+                    } else if (step >= questions.length - 1) {
+                         const ctaMessage = `
+                            <a href="/dashboard.html" class="block w-full text-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-amber-600 hover:bg-amber-700">
+                                Take Me to My Dashboard
+                            </a>
+                        `;
+                        addMessage(ctaMessage, 'ai', 500);
+                        inputArea.style.display = 'none';
+                    } else {
+                        messageInput.type = currentStep.type || 'text';
+                        messageInput.placeholder = `Type your answer...`;
+                        messageInput.disabled = false;
+                        messageInput.focus();
+                    }
+                });
+               
+            };
+
+
+            chatForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const message = messageInput.value.trim();
+                if (message) {
+                    const currentStep = questions[step];
+                    userData[currentStep.key] = message;
+                    addMessage(message, 'user');
+                    messageInput.value = '';
+                    messageInput.disabled = true;
+                    messageInput.placeholder = 'Bridely is typing...';
+                    step++;
+                    handleNextStep();
+                }
+            });
+
+
+            // Start the conversation
+            handleNextStep();
+        });
+    </script>
+</body>
+</html>
